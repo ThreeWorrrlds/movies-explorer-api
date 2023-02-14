@@ -5,6 +5,14 @@ const BadRequestError = require('../errors/bad-request-error');
 const Conflict = require('../errors/conflict');
 const NotFound = require('../errors/not-found');
 const Unauthorized = require('../errors/unauthorized');
+const {
+  userMessageBadReqOne,
+  userMessageBadReqTwo,
+  userMessageBadReqThree,
+  userMessageConflictOne,
+  userMessageUnauthorizedOne,
+  userMessageNotFoundOne,
+} = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET = 'dev-secret' } = process.env;
 
@@ -27,10 +35,10 @@ module.exports.createUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Некорректные данные при регистрации пользователя'));
+        next(new BadRequestError(userMessageBadReqOne));
       }
       if (err.code === 11000) {
-        next(new Conflict('Такой пользователь уже существует'));
+        next(new Conflict(userMessageConflictOne));
       } else {
         next(err);
       }
@@ -45,7 +53,7 @@ module.exports.login = async (req, res, next) => {
       return res.send({ token });
     })
     .catch(() => {
-      next(new Unauthorized('Неправильный логин или пароль'));
+      next(new Unauthorized(userMessageUnauthorizedOne));
     });
 };
 
@@ -55,11 +63,11 @@ module.exports.getCurrentUser = async (req, res, next) => {
     if (currentUser) {
       res.status(200).send(currentUser);
     } else {
-      next(new NotFound('Пользователь не найден'));
+      next(new NotFound(userMessageNotFoundOne));
     }
   } catch (err) {
     if (err.name === 'CastError') {
-      next(new BadRequestError('Невалидный id'));
+      next(new BadRequestError(userMessageBadReqTwo));
     } else {
       next(err);
     }
@@ -77,7 +85,7 @@ module.exports.updateUserInfo = async (req, res, next) => {
     res.status(200).send(newInfoAboutUser);
   } catch (err) {
     if (err.name === 'ValidationError') {
-      next(new BadRequestError('Некорректные данные при обновлении профиля'));
+      next(new BadRequestError(userMessageBadReqThree));
     } else {
       next(err);
     }
