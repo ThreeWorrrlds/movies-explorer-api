@@ -8,7 +8,7 @@ module.exports.validateUserData = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).pattern(/^[а-я0-9\sёЁ]+$/i),
   }).unknown(),
 });
 
@@ -26,12 +26,12 @@ module.exports.validateMovieData = celebrate({
       country: Joi.string()
         .required()
         .min(2)
-        .max(30),
+        .max(300),
 
       director: Joi.string()
         .required()
         .min(2)
-        .max(30),
+        .max(300),
 
       duration: Joi.number()
         .integer()
@@ -47,7 +47,7 @@ module.exports.validateMovieData = celebrate({
       description: Joi.string()
         .required()
         .min(10)
-        .max(150),
+        .max(10000),
 
       image: Joi.string()
         .required()
@@ -82,11 +82,15 @@ module.exports.validateMovieData = celebrate({
 
       nameRU: Joi.string()
         .required()
-        .pattern(/^[а-я0-9\sёЁ]+$/i),
+        .min(2)
+        .max(100),
+      /* .pattern(/^[а-я0-9\sёЁ]+$/i),  только цифры и русские буквы */
 
       nameEN: Joi.string()
         .required()
-        .pattern(/^[a-z0-9\s]+$/i),
+        .min(2)
+        .max(50),
+      /* .pattern(/^[a-z0-9\s]+$/i), только цифры и английские буквы */
 
     }).unknown(),
 });
