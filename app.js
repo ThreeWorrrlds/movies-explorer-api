@@ -12,15 +12,18 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const whiteList = [
   'https://praktikum.tk',
   'http://praktikum.tk',
-  'https://maxim.nomoredomains.club',
-  'http://maxim.nomoredomains.club',
-  'maxim.nomoredomains.club',
-  'https://api.maxim.nomoredomains.club',
-  'http://api.maxim.nomoredomains.club',
-  'api.maxim.nomoredomains.club',
+  'https://harrymidas.nomoredomains.work',
+  'http://harrymidas.nomoredomains.work',
+  'harrymidas.nomoredomains.work',
+  'https://api.harrymidas.nomoredomains.work',
+  'http://api.harrymidas.nomoredomains.work',
+  'api.harrymidas.nomoredomains.work',
   'https://localhost:3000',
   'http://localhost:3000',
   'localhost:3000',
+  'https://localhost:3005',
+  'http://localhost:3005',
+  'localhost:3005',
 ];
 
 const corsOptions = {
