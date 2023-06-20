@@ -83,13 +83,13 @@ module.exports.validateMovieData = celebrate({
       nameRU: Joi.string()
         .required()
         .min(2)
-        .max(100),
+        .max(150),
       /* .pattern(/^[а-я0-9\sёЁ]+$/i),  только цифры и русские буквы */
 
       nameEN: Joi.string()
         .required()
         .min(2)
-        .max(50),
+        .max(150),
       /* .pattern(/^[a-z0-9\s]+$/i), только цифры и английские буквы */
 
     }).unknown(),

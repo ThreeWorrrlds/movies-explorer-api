@@ -86,6 +86,8 @@ module.exports.updateUserInfo = async (req, res, next) => {
   } catch (err) {
     if (err.name === 'ValidationError') {
       next(new BadRequestError(userMessageBadReqThree));
+    } if (err.code === 11000) {
+      next(new Conflict(userMessageConflictOne));
     } else {
       next(err);
     }

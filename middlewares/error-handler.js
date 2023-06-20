@@ -1,4 +1,5 @@
 module.exports.errorHandler = (err, req, res, next) => {
+  /* res.send(err.message); */
   const { statusCode = 500, message } = err;
 
   res
